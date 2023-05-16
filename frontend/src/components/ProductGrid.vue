@@ -76,7 +76,7 @@ function massDelete() {
     // manual serialization (probably temporary)
     // const encodedSkus = encodeURIComponent(JSON.stringify(skus));
     // "%5B%22" + "%22,%22".join(skus) + "%22%5D"
-    const url = `${BASE_URL}/products/delete?skus=${"%5B%22" + "%22,%22".join(skus) + "%22%5D"}`
+    const url = `${BASE_URL}/products/delete?skus=${"%5B%22" + skus.join("%22,%22") + "%22%5D"}`
     // const url = `${BASE_URL}/products/delete?skus=${encodedSkus}` // again, using manual version for now
     fetch(url, {
         method: 'DELETE',
