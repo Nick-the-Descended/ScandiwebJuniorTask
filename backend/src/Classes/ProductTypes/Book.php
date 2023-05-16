@@ -16,7 +16,7 @@ class Book extends AbstractProduct
     public function setWeight(float $weight): Book
     {
         if ($weight < 0) {
-            throw new InvalidArgumentException('DVD size cannot be negative.');
+            throw new InvalidArgumentException('Book weight cannot be negative.');
         }
 
         $this->weight = $weight;
@@ -29,7 +29,7 @@ class Book extends AbstractProduct
             "sku" => $this->getSku(),
             "name" => $this->getName(),
             "price" => $this->getPrice() . " $",
-            "attribute" => "Weight" . $this->getWeight() . "KG"
+            "attribute" => "Weight: " . $this->getWeight() . " KG"
         ];
     }
 }
