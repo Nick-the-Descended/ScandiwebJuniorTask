@@ -68,12 +68,12 @@ class ProductService
 
     private function createProductFromRow($row): ? ProductInterface
     {
-        return match ($row['product_type']) {
-            "Book" => $this->createBook($row),
-            "Furniture" => $this->createFurniture($row),
-            "DVD" => $this->createDVD($row),
-            default => null,
-        };
+        $productType = $row['product_type'];
+        $method = 'create' . $productType;
+        if (method_exists($this, $method)) {
+            return $this->$method($row);
+        }
+        return null;
     }
 
     public function deleteProducts(array $skus): int
