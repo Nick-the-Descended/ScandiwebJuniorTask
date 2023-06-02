@@ -11,7 +11,7 @@
             <div class="input-container">
                 <div class="input-fields">
                     <label for="sku">SKU</label>
-                    <input id="sku" type="text" v-model="form.sku" :class="{ error: !form.validSku }" placeholder="SKU" />
+                    <input id="sku" type="text" v-model="form.sku" :class="{ error: !form.validSku && focusedSku }" @focus="handleSkuFocus" placeholder="SKU" />
 
                     <label for="name">Name</label>
                     <input id="name" type="text" v-model="form.name" placeholder="Name"/>
@@ -143,6 +143,13 @@ const isSaveDisabled = computed(() => {
     // Check if any of the required fields are empty or invalid
     return !form.value.validSku || !form.value.validName || !form.value.validPrice || !form.value.validAttribute;
 });
+let focusedSku = ref(false);
+
+watch(focusedSku, (newValue) => focusedSku.value = true)
+
+function handleSkuFocus(){
+    focusedSku.value = true;
+}
 
 const isSaveDisabledRef = ref(false);
 watch(isSaveDisabled, (newValue) => {
@@ -228,5 +235,9 @@ select {
 
 .buttons {
     display: flex;
+}
+
+.error {
+    border: 1.5px solid red;
 }
 </style>
